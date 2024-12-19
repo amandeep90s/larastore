@@ -3,11 +3,11 @@ import InputLabel from '@/Components/Core/InputLabel';
 import PrimaryButton from '@/Components/Core/PrimaryButton';
 import TextInput from '@/Components/Core/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
-import {Head, useForm} from '@inertiajs/react';
-import {FormEventHandler} from 'react';
+import { Head, useForm } from '@inertiajs/react';
+import { FormEventHandler } from 'react';
 
 export default function ConfirmPassword() {
-  const {data, setData, post, processing, errors, reset} = useForm({
+  const { data, setData, post, processing, errors, reset } = useForm({
     password: '',
   });
 
@@ -21,16 +21,15 @@ export default function ConfirmPassword() {
 
   return (
     <GuestLayout>
-      <Head title="Confirm Password"/>
+      <Head title="Confirm Password" />
 
       <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        This is a secure area of the application. Please confirm your
-        password before continuing.
+        This is a secure area of the application. Please confirm your password before continuing.
       </div>
 
       <form onSubmit={submit}>
         <div className="mt-4">
-          <InputLabel htmlFor="password" value="Password"/>
+          <InputLabel htmlFor="password" value="Password" />
 
           <TextInput
             id="password"
@@ -42,7 +41,7 @@ export default function ConfirmPassword() {
             onChange={(e) => setData('password', e.target.value)}
           />
 
-          <InputError message={errors.password} className="mt-2"/>
+          <InputError message={errors.password} className="mt-2" />
         </div>
 
         <div className="mt-4 flex items-center justify-end">
