@@ -10,21 +10,21 @@ use Spatie\Permission\Models\Role;
 
 class RoleSeeder extends Seeder
 {
-  /**
-   * Run the database seeds.
-   */
-  public function run(): void
-  {
-    $userRole = Role::create(['name' => RolesEnum::User->value]);
-    $adminRole = Role::create(['name' => RolesEnum::Admin->value]);
-    $vendorRole = Role::create(['name' => RolesEnum::Vendor->value]);
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
+    {
+        $userRole = Role::create(['name' => RolesEnum::User->value]);
+        $adminRole = Role::create(['name' => RolesEnum::Admin->value]);
+        $vendorRole = Role::create(['name' => RolesEnum::Vendor->value]);
 
-    $approveVendors = Permission::create(['name' => PermissionsEnum::ApproveVendors->value]);
-    $sellProducts = Permission::create(['name' => PermissionsEnum::SellProducts->value]);
-    $buyProducts = Permission::create(['name' => PermissionsEnum::BuyProducts->value]);
+        $approveVendors = Permission::create(['name' => PermissionsEnum::ApproveVendors->value]);
+        $sellProducts = Permission::create(['name' => PermissionsEnum::SellProducts->value]);
+        $buyProducts = Permission::create(['name' => PermissionsEnum::BuyProducts->value]);
 
-    $userRole->syncPermissions([$buyProducts]);
-    $vendorRole->syncPermissions([$sellProducts, $buyProducts]);
-    $adminRole->syncPermissions([$approveVendors, $sellProducts, $buyProducts]);
-  }
+        $userRole->syncPermissions([$buyProducts]);
+        $vendorRole->syncPermissions([$sellProducts, $buyProducts]);
+        $adminRole->syncPermissions([$approveVendors, $sellProducts, $buyProducts]);
+    }
 }
