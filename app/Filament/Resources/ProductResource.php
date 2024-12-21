@@ -97,7 +97,17 @@ class ProductResource extends Resource
   {
     return $table
       ->columns([
-        //
+        Tables\Columns\TextColumn::make('title')
+          ->sortable()
+          ->words(10)
+          ->searchable(),
+        Tables\Columns\TextColumn::make('status')
+          ->badge()
+          ->colors(ProductStatusEnums::colors()),
+        Tables\Columns\TextColumn::make('department.name'),
+        Tables\Columns\TextColumn::make('category.name'),
+        Tables\Columns\TextColumn::make('created_at')
+          ->dateTime()
       ])
       ->filters([
         Tables\Filters\TrashedFilter::make(),
