@@ -17,6 +17,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Str;
 
 class ProductResource extends Resource
@@ -99,7 +100,7 @@ class ProductResource extends Resource
         //
       ])
       ->filters([
-        //
+        Tables\Filters\TrashedFilter::make(),
       ])
       ->actions([
         Tables\Actions\EditAction::make(),
@@ -107,6 +108,8 @@ class ProductResource extends Resource
       ->bulkActions([
         Tables\Actions\BulkActionGroup::make([
           Tables\Actions\DeleteBulkAction::make(),
+          Tables\Actions\ForceDeleteBulkAction::make(),
+          Tables\Actions\RestoreBulkAction::make(),
         ]),
       ]);
   }
@@ -132,5 +135,13 @@ class ProductResource extends Resource
     $user = Filament::auth()->user();
 
     return $user && $user->hasRole(RolesEnum::Vendor);
+  }
+
+  public static function getEloquentQuery(): Builder
+  {
+    return parent::getEloquentQuery()
+      ->withoutGlobalScopes([
+        SoftDeletingScope::class,
+      ]);
   }
 }
