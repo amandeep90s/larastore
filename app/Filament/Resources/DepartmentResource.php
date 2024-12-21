@@ -42,7 +42,7 @@ class DepartmentResource extends Resource
       ->columns([
         Tables\Columns\TextColumn::make('name')->sortable()->searchable(),
         Tables\Columns\TextColumn::make('slug'),
-        Tables\Columns\ToggleColumn::make('active'),
+        Tables\Columns\IconColumn::make('active')->boolean(),
       ])
       ->defaultSort('created_at', 'desc')
       ->filters([
@@ -62,7 +62,7 @@ class DepartmentResource extends Resource
   public static function getRelations(): array
   {
     return [
-      //
+      RelationManagers\CategoriesRelationManager::class
     ];
   }
 
@@ -78,7 +78,7 @@ class DepartmentResource extends Resource
   public static function canViewAny(): bool
   {
     $user = Filament::auth()->user();
-    
+
     return $user && $user->hasRole(RolesEnum::Admin);
   }
 }
