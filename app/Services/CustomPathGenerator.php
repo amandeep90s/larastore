@@ -7,19 +7,18 @@ use Spatie\MediaLibrary\Support\PathGenerator\PathGenerator;
 
 class CustomPathGenerator implements PathGenerator
 {
+    public function getPath(Media $media): string
+    {
+        return md5($media->id.config('app.key')).'/';
+    }
 
-  public function getPath(Media $media): string
-  {
-    return md5($media->id . config('app.key')) . '/';
-  }
+    public function getPathForConversions(Media $media): string
+    {
+        return md5($media->id.config('app.key')).'/conversions/';
+    }
 
-  public function getPathForConversions(Media $media): string
-  {
-    return md5($media->id . config('app.key')) . '/conversions/';
-  }
-
-  public function getPathForResponsiveImages(Media $media): string
-  {
-    return md5($media->id . config('app.key')) . '/responsive-images/';
-  }
+    public function getPathForResponsiveImages(Media $media): string
+    {
+        return md5($media->id.config('app.key')).'/responsive-images/';
+    }
 }

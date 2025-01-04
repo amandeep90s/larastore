@@ -4,22 +4,22 @@ namespace App\Enums;
 
 enum ProductStatusEnums: string
 {
-  case Draft = 'draft';
-  case Published = 'published';
+    case Draft = 'draft';
+    case Published = 'published';
 
-  public static function labels(): array
-  {
-    return [
-      self::Draft->value => __('Draft'),
-      self::Published->value => __('Published'),
-    ];
-  }
+    public static function labels(): array
+    {
+        return [
+            self::Draft->value => __('Draft'),
+            self::Published->value => __('Published'),
+        ];
+    }
 
-  public static function colors(): array
-  {
-    return [
-      'gray' => self::Draft->value,
-      'success' => self::Published->value,
-    ];
-  }
+    public static function colors(): array
+    {
+        return [
+            'gray' => self::Draft->value,
+            'success' => self::Published->value,
+        ];
+    }
 }

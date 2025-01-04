@@ -10,33 +10,33 @@ use Filament\Resources\Pages\EditRecord;
 
 class ProductImages extends EditRecord
 {
-  protected static string $resource = ProductResource::class;
+    protected static string $resource = ProductResource::class;
 
-  protected static ?string $navigationIcon = 'heroicon-c-photo';
+    protected static ?string $navigationIcon = 'heroicon-c-photo';
 
-  public function form(Form $form): Form
-  {
-    return $form
-      ->schema([
-        SpatieMediaLibraryFileUpload::make('images')
-          ->image()
-          ->multiple()
-          ->openable()
-          ->panelLayout('grid')
-          ->collection('images')
-          ->reorderable()
-          ->appendFiles()
-          ->preserveFilenames()
-          ->columnSpan(2)
-      ]);
-  }
+    public function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                SpatieMediaLibraryFileUpload::make('images')
+                    ->image()
+                    ->multiple()
+                    ->openable()
+                    ->panelLayout('grid')
+                    ->collection('images')
+                    ->reorderable()
+                    ->appendFiles()
+                    ->preserveFilenames()
+                    ->columnSpan(2),
+            ]);
+    }
 
-  protected function getHeaderActions(): array
-  {
-    return [
-      Actions\DeleteAction::make(),
-      Actions\ForceDeleteAction::make(),
-      Actions\RestoreAction::make(),
-    ];
-  }
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\DeleteAction::make(),
+            Actions\ForceDeleteAction::make(),
+            Actions\RestoreAction::make(),
+        ];
+    }
 }
